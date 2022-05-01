@@ -3,7 +3,6 @@ using UnityEngine.UI;
 using Photon.Pun;  //引用Phton Pun  API
 using Photon.Realtime; //引用Phton 即時  API
 
-
 /// <summary>
 /// 大廳管理器
 /// 玩家按下對戰按鈕後開始匹配房間
@@ -66,6 +65,9 @@ public class LobbyManager : MonoBehaviourPunCallbacks
 		//Photon連線的加入隨機房間
 		PhotonNetwork.JoinRandomRoom();
 	}
+	//加入隨機房間失敗...
+	//1. 連線品質差導致失敗
+	//2. 還沒有房間
 	public override void OnJoinRandomFailed(short returnCode, string message)
 	{
 		base.OnJoinRandomFailed(returnCode, message);
