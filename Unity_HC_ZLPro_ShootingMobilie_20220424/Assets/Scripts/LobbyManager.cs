@@ -58,7 +58,7 @@ public class LobbyManager : MonoBehaviourPunCallbacks
 	//開始連線對戰
 	public void StartConnect()
 	{
-		print("開始連線...");
+		print("<color=yellow>3. 開始連線</color>");
 
 		//遊戲物件，啟動設定(布林值) - true 顯示，false 隱藏
 		goConnectView.SetActive(true);
@@ -70,18 +70,29 @@ public class LobbyManager : MonoBehaviourPunCallbacks
 	{
 		base.OnJoinRandomFailed(returnCode, message);
 		print("<color=red>4. 加入隨機房間失敗</color>");
-		RoomOptions ro = new RoomOptions();
-		ro.MaxPlayers = 5;
-		PhotonNetwork.CreateRoom("", ro);
+		RoomOptions ro = new RoomOptions(); //新增房間設定物件
+		ro.MaxPlayers = 5;                  //指定房間最大人數
+		PhotonNetwork.CreateRoom("", ro);   //建立房間並給予房間物件
 	}
 
 	//加入房間
 	public override void OnJoinedRoom()
 	{
 		base.OnJoinedRoom();
-		print("< color = yellow > 5.開房者進入房間 </ color >");
-		int currentCount = PhotonNetwork.CurrentRoom.PlayerCount;
-		int maxCount = PhotonNetwork.CurrentRoom.MaxPlayers;
+		print("<color=yellow> 5. 開房者進入房間</color>");
+		int currentCount = PhotonNetwork.CurrentRoom.PlayerCount; //當前房間人數
+		int maxCount = PhotonNetwork.CurrentRoom.MaxPlayers;      //當前房間最大人數
+
+		textCountPlayer.text = "連線人數" + currentCount + " / " + maxCount;
+	}
+
+    //其他玩家進入房間
+	public override void OnPlayerEnteredRoom(Player newPlayer)
+    {
+        base.OnPlayerEnteredRoom(newPlayer);
+		print("<color=yellow> 6. 玩家進入房間</color>");
+		int currentCount = PhotonNetwork.CurrentRoom.PlayerCount; //當前房間人數
+		int maxCount = PhotonNetwork.CurrentRoom.MaxPlayers;      //當前房間最大人數
 
 		textCountPlayer.text = "連線人數" + currentCount + " / " + maxCount;
 	}
