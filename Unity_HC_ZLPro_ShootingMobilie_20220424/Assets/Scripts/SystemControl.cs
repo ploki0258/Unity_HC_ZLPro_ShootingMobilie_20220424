@@ -19,13 +19,18 @@ namespace JACK
 		private float rangeDirectionIcon = 2.5f;
 		[SerializeField, Header("角色旋轉速度"), Range(0, 100)]
 		private float speedTurn = 1.5f;
+		[SerializeField, Header("動畫參數走路")]
+		private string parmeterWalk = "開關跑步";
+
 
 
 		private Rigidbody rig;
+		private Animator ani;
 
 		private void Awake()
 		{
 			rig = GetComponent<Rigidbody>();
+			ani = GetComponent<Animator>();
 		}
 
 		private void Update()
@@ -33,6 +38,7 @@ namespace JACK
 			//GetJoystickValue();
 			UpdateDirectionIconPos();
 			LookDirectionIcon();
+			UpdateAnimation();
 		}
 
 		private void FixedUpdate()
@@ -81,7 +87,19 @@ namespace JACK
 			transform.eulerAngles = new Vector3(0, transform.eulerAngles.y, 0);
 		
 		}
-	}
+
+        /// <summary>
+		/// 更新動畫
+		/// </summary>
+		private void UpdateAnimation()
+        {
+			//是否跑步 = 虛擬搖桿 水平不為零 或 垂直不為零
+			bool run = joystick.Horizontal != 0 || joystick.Vertical != 0;
+			ani.SetBool(parmeterWalk, run);
+        }
+    }
+
+
 }
 
 
