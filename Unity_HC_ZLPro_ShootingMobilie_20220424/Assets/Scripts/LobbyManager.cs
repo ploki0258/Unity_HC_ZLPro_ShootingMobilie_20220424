@@ -24,6 +24,9 @@ public class LobbyManager : MonoBehaviourPunCallbacks
 	//喚醒事件:播放遊戲時執行一次。初始化設定
 	private void Awake()
 	{
+		//螢幕.設定解析度(寬，高，是全螢幕)
+		Screen.SetResolution(1024, 576, false);
+
 		//Photon 連線的連線使用設定
 		PhotonNetwork.ConnectUsingSettings();
 	}
@@ -73,7 +76,7 @@ public class LobbyManager : MonoBehaviourPunCallbacks
 		base.OnJoinRandomFailed(returnCode, message);
 		print("<color=red>4. 加入隨機房間失敗</color>");
 		RoomOptions ro = new RoomOptions(); //新增房間設定物件
-		ro.MaxPlayers = 5;                  //指定房間最大人數
+		ro.MaxPlayers = 2;                  //指定房間最大人數
 		PhotonNetwork.CreateRoom("", ro);   //建立房間並給予房間物件
 	}
 

@@ -31,7 +31,7 @@ namespace JACK
 			traSpawnPointList = new List<Transform>(); //新增清單物件
 			traSpawnPointList = traSpawnPoint.ToList(); //陣列轉為清單資料結構
 
-			Screen.SetResolution(024, 576, false);
+			
 
 			//螢幕.設定解析度(寬，高，是全螢幕)
 			//PhotonNetwork.ConnectUsingSettings();

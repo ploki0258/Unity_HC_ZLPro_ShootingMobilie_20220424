@@ -45,7 +45,7 @@ namespace JACK
             if (photonView.IsMine)
             {
                 PlayerUIFollow follow = Instantiate(goCanvasPlayerInfo).GetComponent<PlayerUIFollow>();
-                follow.traPlayer = transform;
+                if (follow) follow.traPlayer = transform;
 
                 Instantiate(goCanvasPlayerInfo);
                 traDirectionIcon = Instantiate(goDirection).transform;  //取得角色方向圖示

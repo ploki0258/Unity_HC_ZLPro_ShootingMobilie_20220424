@@ -26,7 +26,7 @@ namespace JACK
         private void Awake()
         {
             //發射按鈕.點擊.添加監聽器(開槍方法) - 按下發射按鈕執行開槍方法
-            btnFire.onClick.AddListener(Fire);
+            if(btnFire) btnFire.onClick.AddListener(Fire);
         }
 
         /// <summary>
