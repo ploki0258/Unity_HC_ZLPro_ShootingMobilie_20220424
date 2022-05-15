@@ -34,11 +34,11 @@ namespace JACK
 			Screen.SetResolution(024, 576, false);
 
 			//螢幕.設定解析度(寬，高，是全螢幕)
-			PhotonNetwork.ConnectUsingSettings();
+			//PhotonNetwork.ConnectUsingSettings();
 
 			//如果是連線進入的玩家就在伺服器生成角色物件
-			if (photonView.IsMine)
-			{
+			//if (photonView.IsMine)
+			// {
 				int indexRandom = Random.Range(0, traSpawnPointList.Count); //取得隨機清單(0，清單長度)
 				Transform tra = traSpawnPointList[indexRandom]; //取得隨機座標
 
@@ -46,7 +46,7 @@ namespace JACK
 				PhotonNetwork.Instantiate(goCharacter.name, tra.position, tra.rotation);
 
 				traSpawnPointList.RemoveAt(indexRandom); //刪除已取得的生成座標資料
-			}
+			// }
 		}
 	}
 }
