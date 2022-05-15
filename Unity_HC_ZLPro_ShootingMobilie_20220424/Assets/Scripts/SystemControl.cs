@@ -1,4 +1,5 @@
 using UnityEngine;
+using Photon.Pun;
 
 //namespace 命名空間:城市區塊
 namespace JACK
@@ -7,7 +8,7 @@ namespace JACK
 	/// 控制系統:荒野亂鬥移動系統
 	/// 虛擬搖桿控制角色移動
 	/// </summary>
-	public class SystemControl : MonoBehaviour
+	public class SystemControl : MonoBehaviourPun
 	{
 		[SerializeField, Header("虛擬搖桿")]
 		private Joystick joystick;
@@ -21,8 +22,12 @@ namespace JACK
 		private float speedTurn = 1.5f;
 		[SerializeField, Header("動畫參數走路")]
 		private string parmeterWalk = "開關跑步";
-
-
+		[SerializeField, Header("畫布")]
+		private GameObject goCanvas;
+		[SerializeField, Header("畫布玩家資訊")]
+		private GameObject goCanvasPlayerInfo;
+		[SerializeField, Header("方向圖示角色")]
+		private GameObject goDirection;
 
 		private Rigidbody rig;
 		private Animator ani;
@@ -31,6 +36,13 @@ namespace JACK
 		{
 			rig = GetComponent<Rigidbody>();
 			ani = GetComponent<Animator>();
+
+			if (photonView.IsMine)
+			{
+				Instantiate(goCanvas);
+				Instantiate(goCanvasPlayerInfo);
+				Instantiate(goDirection);
+			}
 		}
 
 		private void Update()
@@ -60,7 +72,7 @@ namespace JACK
 		private void Move()
 		{
 			//剛體.加速度 = 三維向量(X，Y，Z)
-			rig.velocity = new Vector3(joystick.Horizontal, 0, joystick.Vertical ) * speed;
+			rig.velocity = new Vector3(joystick.Horizontal, 0, joystick.Vertical) * speed;
 		}
 
 		/// <summary>
@@ -85,19 +97,19 @@ namespace JACK
 			transform.rotation = Quaternion.Lerp(transform.rotation, look, speedTurn * Time.deltaTime);
 			//角色的角度 = 三維向量(0,原本的歐拉角度Y,0)
 			transform.eulerAngles = new Vector3(0, transform.eulerAngles.y, 0);
-		
+
 		}
 
-        /// <summary>
+		/// <summary>
 		/// 更新動畫
 		/// </summary>
 		private void UpdateAnimation()
-        {
+		{
 			//是否跑步 = 虛擬搖桿 水平不為零 或 垂直不為零
 			bool run = joystick.Horizontal != 0 || joystick.Vertical != 0;
 			ani.SetBool(parmeterWalk, run);
-        }
-    }
+		}
+	}
 
 
 }
