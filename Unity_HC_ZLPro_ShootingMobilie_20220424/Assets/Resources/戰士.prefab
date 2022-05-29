@@ -1961,6 +1961,7 @@ GameObject:
   - component: {fileID: -748928800083184502}
   - component: {fileID: -7419247904084404920}
   - component: {fileID: -3596112616330312444}
+  - component: {fileID: -5632851253871164780}
   m_Layer: 0
   m_Name: "\u6230\u58EB"
   m_TagString: Untagged
@@ -2117,13 +2118,13 @@ MonoBehaviour:
   ShowParameterInspector: 1
   m_SynchronizeParameters:
   - Type: 9
-    SynchronizeType: 0
+    SynchronizeType: 1
     Name: "\u89F8\u767C\u539F\u5730\u5C04\u64CA"
   - Type: 4
-    SynchronizeType: 0
+    SynchronizeType: 1
     Name: "\u958B\u95DC\u8DD1\u6B65"
   m_SynchronizeLayers:
-  - SynchronizeType: 0
+  - SynchronizeType: 1
     LayerIndex: 0
 --- !u!114 &-3596112616330312444
 MonoBehaviour:
@@ -2141,6 +2142,22 @@ MonoBehaviour:
   m_SynchronizeAngularVelocity: 0
   m_TeleportEnabled: 0
   m_TeleportIfDistanceGreaterThan: 3
+--- !u!114 &-5632851253871164780
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 589230399059235806}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 627855c7f81362d41938ffe0b1475957, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_SynchronizePosition: 1
+  m_SynchronizeRotation: 1
+  m_SynchronizeScale: 0
+  m_UseLocal: 1
 --- !u!1 &589230399059235808
 GameObject:
   m_ObjectHideFlags: 0
