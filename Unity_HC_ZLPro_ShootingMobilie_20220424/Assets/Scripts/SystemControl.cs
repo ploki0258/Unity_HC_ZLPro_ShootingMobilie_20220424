@@ -4,7 +4,7 @@ using Cinemachine;
 using Photon.Realtime;
 using UnityEngine.UI;
 
-//namespace 命名空間:城市區塊
+//namespace 命名空間:程式區塊
 namespace JACK
 {
     /// <summary>
