@@ -34,12 +34,14 @@ namespace JACK
         private Transform traDirectionIcon;
         private CinemachineVirtualCamera cvc;
         private SystemAttack systemAttack;
+        private DamageManager damageManager;
 
         private void Awake()
         {
             rig = GetComponent<Rigidbody>();
             ani = GetComponent<Animator>();
             systemAttack = GetComponent<SystemAttack>();
+            damageManager = GetComponent<DamageManager>();
 
             //如果是連線進入的玩家 就生成玩家需要物件
             if (photonView.IsMine)
@@ -57,8 +59,10 @@ namespace JACK
 
                 cvc = GameObject.Find("CM 管理器").GetComponent<CinemachineVirtualCamera>(); //取得攝影機CM 管理器
                 cvc.Follow = transform; //指定追蹤物件
-            }
 
+                damageManager.imgHp = GameObject.Find("圖片血量").GetComponent<Image>();
+                damageManager.textHp = GameObject.Find("文字血量").GetComponent<Text>();
+            }
             //否則 不是進入的玩家 就關閉控制系統，避免控制到多個物件
             else
             {
