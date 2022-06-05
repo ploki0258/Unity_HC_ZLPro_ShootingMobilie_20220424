@@ -3,6 +3,8 @@ using Photon.Pun;
 using Cinemachine;
 using Photon.Realtime;
 using UnityEngine.UI;
+using TMPro;
+using System;
 
 //namespace 命名空間:程式區塊
 namespace JACK
@@ -25,16 +27,17 @@ namespace JACK
         private GameObject goCanvas;
         [SerializeField, Header("畫布玩家資訊")]
         private GameObject goCanvasPlayerInfo;
-        [SerializeField, Header("方向圖示角色")]
+        [SerializeField, Header("角色方向圖示")]
         private GameObject goDirection;
 
         private Rigidbody rig;
         private Animator ani;
         private Joystick joystick;
-        private Transform traDirectionIcon;
+        public Transform traDirectionIcon;
         private CinemachineVirtualCamera cvc;
         private SystemAttack systemAttack;
         private DamageManager damageManager;
+
 
         private void Awake()
         {
@@ -47,9 +50,8 @@ namespace JACK
             if (photonView.IsMine)
             {
                 PlayerUIFollow follow = Instantiate(goCanvasPlayerInfo).GetComponent<PlayerUIFollow>();
-                if (follow) follow.traPlayer = transform;
+                follow.traPlayer = transform;
 
-                Instantiate(goCanvasPlayerInfo);
                 traDirectionIcon = Instantiate(goDirection).transform;  //取得角色方向圖示
 
                 //transform.Find(子物件名稱) = 透過名稱搜尋子物件
@@ -60,8 +62,8 @@ namespace JACK
                 cvc = GameObject.Find("CM 管理器").GetComponent<CinemachineVirtualCamera>(); //取得攝影機CM 管理器
                 cvc.Follow = transform; //指定追蹤物件
 
-                damageManager.imgHp = GameObject.Find("圖片血量").GetComponent<Image>();
-                damageManager.textHp = GameObject.Find("文字血量").GetComponent<Text>();
+                damageManager.imgHp = GameObject.Find("圖片血條").GetComponent<Image>();
+                damageManager.textHp = GameObject.Find("文字血量").GetComponent<TextMeshProUGUI>();
             }
             //否則 不是進入的玩家 就關閉控制系統，避免控制到多個物件
             else
@@ -116,6 +118,9 @@ namespace JACK
         /// </summary>
         private void LookDirectionIcon()
         {
+            //如果 垂直絕對值 小於 0.1 並且 水平絕對值 小於 0.1 就 不處理面向
+            if (Mathf.Abs(joystick.Vertical) < 0.1f && Mathf.Abs(joystick.Horizontal) < 0.1f) return;
+
             //取得面相角度 = 四位元.面相角度(方向圖示 - 角色) - 方向圖示與角色的向量
             Quaternion look = Quaternion.LookRotation(traDirectionIcon.position - transform.position);
             //角色的角度 = 四位元.插值(角色的角度，面相角度，旋轉速度 * 一幀的時間)
