@@ -98,7 +98,9 @@ namespace JACK
         {
             SystemControl.enabled = false;
             systemAttack.enabled = false;
-            SystemControl.traDirectionIcon.gameObject.SetActive(false);
+            
+            //如果 控制系統 的 方向圖示 存在  在處理隱藏
+            if (SystemControl.traDirectionIcon) SystemControl.traDirectionIcon.gameObject.SetActive(false);
 
             float valueDissolve = 5;                                  //溶解數值起始值
             

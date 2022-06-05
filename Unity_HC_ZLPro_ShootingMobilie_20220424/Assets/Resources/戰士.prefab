@@ -2076,7 +2076,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   btnFire: {fileID: 0}
-  goBullet: {fileID: 7667584790827742241, guid: 082ca3a0e58e58241b9a9ff80aa3f10d, type: 3}
+  goBullet: {fileID: 6600725465563963876, guid: 7b13de3f58697864a9df183a08118bc7, type: 3}
   bulletCountMax: 3
   traFire: {fileID: 589230399933461608}
   speedFire: 500
