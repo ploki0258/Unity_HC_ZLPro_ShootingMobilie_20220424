@@ -4,6 +4,7 @@ using Photon.Pun;
 using TMPro;
 using System.Collections;
 using Cinemachine.Utility;
+using System;
 
 namespace JACK
 {
@@ -109,6 +110,21 @@ namespace JACK
                 valueDissolve -= 0.3f;                                //溶解值遞減0.3
                 materialDissolve.SetFloat("dissolve", valueDissolve); //更新著色器屬性，注意控制Reference
                 yield return new WaitForSeconds(0.08f);               //等待
+            }                            
+
+            ReturnToLobby();
+        }
+
+
+        /// <summary>
+        /// 回到大廳
+        /// </summary>
+        private void ReturnToLobby()
+        {
+            if (photonView.IsMine)
+            {
+                PhotonNetwork.LeaveRoom();          //離開大廳
+                PhotonNetwork.LoadLevel("遊戲大廳"); //回到大廳場景
             }
         }
     }
